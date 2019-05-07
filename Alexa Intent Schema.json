@@ -1,0 +1,1103 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "lab view",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "ChangeVoltage",
+                    "slots": [
+                        {
+                            "name": "volts",
+                            "type": "VOLT_TYPE",
+                            "samples": [
+                                "{volts}"
+                            ]
+                        },
+                        {
+                            "name": "variations",
+                            "type": "VARIATIONS"
+                        },
+                        {
+                            "name": "changeVariant",
+                            "type": "CHANGE_VARIANT"
+                        },
+                        {
+                            "name": "numberVolts",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{numberVolts}"
+                            ]
+                        },
+                        {
+                            "name": "numberDecimalVolts",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "voltageChannel",
+                            "type": "CHANNEL",
+                            "samples": [
+                                "{voltageChannel}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{variations} {voltageChannel} voltage {numberVolts} {volts}",
+                        "{variations} the voltage {voltageChannel} {numberVolts} {volts}",
+                        "{variations} the voltage on {voltageChannel} {numberVolts} {volts}",
+                        "{variations} {voltageChannel} voltage {changeVariant} {numberVolts} {volts}",
+                        "{variations} the voltage on {voltageChannel} {changeVariant} {numberVolts} {volts}",
+                        "to {variations} {voltageChannel} voltage {numberVolts} {volts}",
+                        "to {variations} the voltage {voltageChannel} {numberVolts} {volts}",
+                        "to {variations} the voltage on {voltageChannel} {numberVolts} {volts}",
+                        "to {variations} {voltageChannel} voltage {changeVariant} {numberVolts} {volts}",
+                        "to {variations} the voltage on {voltageChannel} {changeVariant} {numberVolts} {volts}",
+                        "{variations} {voltageChannel} voltage {numberVolts} point {numberDecimalVolts} {volts}",
+                        "{variations} the voltage {voltageChannel} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "{variations} the voltage on {voltageChannel} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "{variations} {voltageChannel} voltage {changeVariant} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "{variations} the voltage on {voltageChannel} {changeVariant} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "to {variations} {voltageChannel} voltage {numberVolts} point {numberDecimalVolts} {volts}",
+                        "to {variations} the voltage {voltageChannel} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "to {variations} the voltage on {voltageChannel} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "to {variations} {voltageChannel} voltage {changeVariant} {numberVolts} point {numberDecimalVolts} {volts}",
+                        "to {variations} the voltage on {voltageChannel} {changeVariant} {numberVolts} point {numberDecimalVolts} {volts}"
+                    ]
+                },
+                {
+                    "name": "ChangeCurrent",
+                    "slots": [
+                        {
+                            "name": "variations",
+                            "type": "VARIATIONS"
+                        },
+                        {
+                            "name": "currentChannel",
+                            "type": "CHANNEL",
+                            "samples": [
+                                "{currentChannel}"
+                            ]
+                        },
+                        {
+                            "name": "numberAmps",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "amps",
+                            "type": "AMP_TYPE",
+                            "samples": [
+                                "{amps}"
+                            ]
+                        },
+                        {
+                            "name": "numberDecimalAmps",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "changeVariant",
+                            "type": "CHANGE_VARIANT"
+                        }
+                    ],
+                    "samples": [
+                        "to {variations} the current on {currentChannel} {changeVariant} {numberAmps} point {numberDecimalAmps} {amps}",
+                        "to {variations} the current on {currentChannel} {changeVariant} {numberAmps} {amps}",
+                        "{variations} the current on {currentChannel} {changeVariant} {numberAmps} point {numberDecimalAmps} {amps}",
+                        "{variations} the current on {currentChannel} {changeVariant} {numberAmps} {amps}",
+                        "{variations} {currentChannel} current {changeVariant} {numberAmps} point {numberDecimalAmps} {amps}",
+                        "{variations} {currentChannel} current {changeVariant} {numberAmps} {amps}",
+                        "{variations} the current on {currentChannel} {numberAmps} point {numberDecimalAmps} {amps}",
+                        "{variations} the current on {currentChannel} {numberAmps} {amps}",
+                        "{variations} the current {currentChannel} {numberAmps} point {numberDecimalAmps} {amps}",
+                        "{variations} the current {currentChannel} {numberAmps} {amps}",
+                        "{variations} {currentChannel} current {numberAmps} point {numberDecimalAmps} {amps}",
+                        "{variations} {currentChannel} current {numberAmps} {amps}"
+                    ]
+                },
+                {
+                    "name": "Reset",
+                    "slots": [
+                        {
+                            "name": "instrument",
+                            "type": "INSTRUMENT",
+                            "samples": [
+                                "{instrument}"
+                            ]
+                        },
+                        {
+                            "name": "channel",
+                            "type": "CHANNEL",
+                            "samples": [
+                                "{channel}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "to reset the {instrument} {channel}",
+                        "to reset {instrument} on {channel}",
+                        "to reset the {instrument} on {channel}",
+                        "to reset {instrument} {channel}",
+                        "reset the {instrument} on {channel}",
+                        "reset the {instrument} {channel}",
+                        "reset {instrument} on {channel}",
+                        "reset {instrument} {channel}"
+                    ]
+                },
+                {
+                    "name": "DigitalMultiMeter",
+                    "slots": [
+                        {
+                            "name": "dmmFunction",
+                            "type": "DMM_FUNCTION",
+                            "samples": [
+                                "{dmmFunction}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "record {dmmFunction}",
+                        "measure {dmmFunction}",
+                        "to record  {dmmFunction}",
+                        "to measure {dmmFunction}"
+                    ]
+                },
+                {
+                    "name": "ManualRangeDMM",
+                    "slots": [
+                        {
+                            "name": "range",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{range}"
+                            ]
+                        },
+                        {
+                            "name": "dmmFunction",
+                            "type": "DMM_FUNCTION"
+                        },
+                        {
+                            "name": "rangeDecimal",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "dmmVariations",
+                            "type": "DMM_VARIATIONS"
+                        }
+                    ],
+                    "samples": [
+                        "{dmmVariations} range",
+                        "{dmmVariations} the range ",
+                        "make {dmmFunction} range {range}",
+                        "to make {dmmFunction} range {range}",
+                        "make the {dmmFunction} range {range}",
+                        "to make the {dmmFunction} range {range}",
+                        "change {dmmFunction} range to {range}",
+                        "to change {dmmFunction} range to {range}",
+                        "change the {dmmFunction} range to {range}",
+                        "to change the {dmmFunction} range to {range}",
+                        "make {dmmFunction} range {range} point {rangeDecimal}",
+                        "to make {dmmFunction} range {range} point {rangeDecimal}",
+                        "make the {dmmFunction} range {range} point {rangeDecimal}",
+                        "to make the {dmmFunction} range {range} point {rangeDecimal}",
+                        "change {dmmFunction} range to {range} point {rangeDecimal}",
+                        "to change {dmmFunction} range to {range} point {rangeDecimal}",
+                        "change the {dmmFunction} range to {range} point {rangeDecimal}",
+                        "to change the {dmmFunction} range to {range} point {rangeDecimal}"
+                    ]
+                },
+                {
+                    "name": "OpenProgramme",
+                    "slots": [
+                        {
+                            "name": "programme",
+                            "type": "PROGRAMME",
+                            "samples": [
+                                "{programme}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "open {programme}",
+                        "to open {programme}"
+                    ]
+                },
+                {
+                    "name": "CloseProgramme",
+                    "slots": [
+                        {
+                            "name": "programme",
+                            "type": "PROGRAMME",
+                            "samples": [
+                                "{programme}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "close {programme}",
+                        "to close {programme}"
+                    ]
+                },
+                {
+                    "name": "StopProgramme",
+                    "slots": [
+                        {
+                            "name": "programme",
+                            "type": "PROGRAMME",
+                            "samples": [
+                                "{programme}"
+                            ]
+                        },
+                        {
+                            "name": "action",
+                            "type": "ACTION"
+                        }
+                    ],
+                    "samples": [
+                        "to {action} {programme}",
+                        "{action} {programme}"
+                    ]
+                },
+                {
+                    "name": "DigitalIO",
+                    "slots": [
+                        {
+                            "name": "variations",
+                            "type": "VARIATIONS"
+                        },
+                        {
+                            "name": "pinNumber",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{pinNumber}"
+                            ]
+                        },
+                        {
+                            "name": "DIOaction",
+                            "type": "DIOACTION",
+                            "samples": [
+                                "{DIOaction}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{variations} pin {pinNumber}  {DIOaction}",
+                        "{variations} pin {pinNumber} to {DIOaction}",
+                        "to {variations} pin {pinNumber}  {DIOaction}",
+                        "to {variations} pin {pinNumber} to {DIOaction}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "VARIATIONS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "alter"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "adjust"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "change"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "set"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "make"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "decrease"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "increase"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CHANGE_VARIANT",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "down by"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "up by"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "down to"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "up to "
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "by"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "to"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "VOLT_TYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "kilo volt"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kilo volts"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "milli volts"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "milli volt"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "volt"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "volts"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CHANNEL",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "channel three",
+                                "synonyms": [
+                                    "three"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "channel two",
+                                "synonyms": [
+                                    "two"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "channel one",
+                                "synonyms": [
+                                    "one"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "AMP_TYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "milli amps"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "milli amp"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "amps"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "amp"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "INSTRUMENT",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "power supply"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DMM_FUNCTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "ac voltage",
+                                "synonyms": [
+                                    "volt ac",
+                                    "ac volt",
+                                    "volts ac",
+                                    "ac volts",
+                                    "a the voltage",
+                                    "voltage acc",
+                                    "acc voltage",
+                                    "voltage ac",
+                                    "a cv",
+                                    "ac v",
+                                    "a c v",
+                                    "acv",
+                                    "v ac",
+                                    "va c",
+                                    "v a c",
+                                    "vac"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ac current",
+                                "synonyms": [
+                                    "a the current",
+                                    "current acc",
+                                    "acc current",
+                                    "current ac",
+                                    "a ci",
+                                    "ac i",
+                                    "a c i",
+                                    "aci",
+                                    "i ac",
+                                    "ia c",
+                                    "i a c",
+                                    "iac"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "dc voltage",
+                                "synonyms": [
+                                    "volt dc",
+                                    "dc volt",
+                                    "volts dc",
+                                    "dc volts",
+                                    "voltage dcc",
+                                    "dcc voltage",
+                                    "voltage dc",
+                                    "d cv",
+                                    "dc v",
+                                    "d c v",
+                                    "dcv",
+                                    "v dc",
+                                    "vd c",
+                                    "v d c",
+                                    "vdc"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "dc current",
+                                "synonyms": [
+                                    "current dcc",
+                                    "dcc current",
+                                    "current dc",
+                                    "d ci",
+                                    "dc i",
+                                    "d c i",
+                                    "dci",
+                                    "i dc",
+                                    "id c",
+                                    "i d c",
+                                    "idc"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "diode"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "resistance"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "continuity "
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PROGRAMME",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "lab view",
+                                "synonyms": [
+                                    "love you",
+                                    "love u",
+                                    "labview"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DMM_VARIATIONS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "decrease"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "increase"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ACTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "stop"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "run"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DIOACTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "output"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "input"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "low"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "high "
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "ChangeVoltage",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "volts",
+                            "type": "VOLT_TYPE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.818467842058.824748843652"
+                            }
+                        },
+                        {
+                            "name": "variations",
+                            "type": "VARIATIONS",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "changeVariant",
+                            "type": "CHANGE_VARIANT",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "numberVolts",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.937502274248.372490863360"
+                            }
+                        },
+                        {
+                            "name": "numberDecimalVolts",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "voltageChannel",
+                            "type": "CHANNEL",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.937502274248.1042967416619"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ChangeCurrent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "variations",
+                            "type": "VARIATIONS",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "currentChannel",
+                            "type": "CHANNEL",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.426379236978.168478610339"
+                            }
+                        },
+                        {
+                            "name": "numberAmps",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "amps",
+                            "type": "AMP_TYPE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.426379236978.533135572662"
+                            }
+                        },
+                        {
+                            "name": "numberDecimalAmps",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "changeVariant",
+                            "type": "CHANGE_VARIANT",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "Reset",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.80643596767"
+                    },
+                    "slots": [
+                        {
+                            "name": "instrument",
+                            "type": "INSTRUMENT",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.80643596767.549554862885"
+                            }
+                        },
+                        {
+                            "name": "channel",
+                            "type": "CHANNEL",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.80643596767.1080362538898"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DigitalMultiMeter",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "dmmFunction",
+                            "type": "DMM_FUNCTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1409135422416.166167124763"
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.1409135422416.166167124763.186508403294"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "ManualRangeDMM",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "range",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.978784167964.1520834731682"
+                            }
+                        },
+                        {
+                            "name": "dmmFunction",
+                            "type": "DMM_FUNCTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "rangeDecimal",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "dmmVariations",
+                            "type": "DMM_VARIATIONS",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "OpenProgramme",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "programme",
+                            "type": "PROGRAMME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.335397411498.183999082217"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CloseProgramme",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "programme",
+                            "type": "PROGRAMME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.481130739431.1203747004539"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "StopProgramme",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "programme",
+                            "type": "PROGRAMME",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.683762624087.521907308303"
+                            }
+                        },
+                        {
+                            "name": "action",
+                            "type": "ACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "DigitalIO",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "variations",
+                            "type": "VARIATIONS",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "pinNumber",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.566404835020.1318690265998"
+                            }
+                        },
+                        {
+                            "name": "DIOaction",
+                            "type": "DIOACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.566404835020.845272965619"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.818467842058.824748843652",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Volts, milli volts or kilo volts"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.937502274248.1042967416619",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Is that for Channel one, Channel two or Channel three?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.937502274248.372490863360",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "How many volts was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.426379236978.533135572662",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Is that Amps or MilliAmps?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.426379236978.168478610339",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Is that for Channel one, Channel two or Channel three?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.80643596767.549554862885",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which instrument is that for?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.80643596767",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Was that reset the {instrument} on {channel} ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.80643596767.1080362538898",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which channel was that for?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1409135422416.166167124763",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Sorry, what did you want me to measure?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1409135422416.1275368359358",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "For AC or DC?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.1409135422416.166167124763.186508403294",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Sorry, what did you want me to measure?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.978784167964.1520834731682",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What range was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.335397411498.183999082217",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which programme was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.481130739431.1203747004539",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What programme was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.683762624087.521907308303",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What would you like to stop?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.566404835020.845272965619",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "How did you want me to set that pin?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.566404835020.1318690265998",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which pin number was that?"
+                    }
+                ]
+            }
+        ]
+    }
+}
