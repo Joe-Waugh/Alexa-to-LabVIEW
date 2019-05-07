@@ -6,7 +6,7 @@ var AWS = require('aws-sdk');
 
 var config = {};
 
-config.IOT_BROKER_ENDPOINT      = "as0nu2tb7tu3r-ats.iot.eu-west-1.amazonaws.com".toLowerCase();
+config.IOT_BROKER_ENDPOINT      = "XXX.iot.eu-west-1.amazonaws.com".toLowerCase(); //Put endpoint in place of XXX
 
 config.IOT_BROKER_REGION        = "eu-west-1";
 
