@@ -137,15 +137,8 @@
                     ]
                 },
                 {
-                    "name": "Reset",
+                    "name": "PsReset",
                     "slots": [
-                        {
-                            "name": "instrument",
-                            "type": "INSTRUMENT",
-                            "samples": [
-                                "{instrument}"
-                            ]
-                        },
                         {
                             "name": "channel",
                             "type": "CHANNEL",
@@ -155,14 +148,14 @@
                         }
                     ],
                     "samples": [
-                        "to reset the {instrument} {channel}",
-                        "to reset {instrument} on {channel}",
-                        "to reset the {instrument} on {channel}",
-                        "to reset {instrument} {channel}",
-                        "reset the {instrument} on {channel}",
-                        "reset the {instrument} {channel}",
-                        "reset {instrument} on {channel}",
-                        "reset {instrument} {channel}"
+                        "to reset power supply on {channel}",
+                        "to reset the power supply {channel}",
+                        "to reset the power supply on {channel}",
+                        "to reset power supply {channel}",
+                        "reset the power supply on {channel}",
+                        "reset the power supply {channel}",
+                        "reset power supply on {channel}",
+                        "reset power supply {channel}"
                     ]
                 },
                 {
@@ -306,6 +299,140 @@
                         "{variations} pin {pinNumber} to {DIOaction}",
                         "to {variations} pin {pinNumber}  {DIOaction}",
                         "to {variations} pin {pinNumber} to {DIOaction}"
+                    ]
+                },
+                {
+                    "name": "MSO",
+                    "slots": [
+                        {
+                            "name": "MSOAction",
+                            "type": "MSOACTION"
+                        },
+                        {
+                            "name": "signalType",
+                            "type": "SIGNALTYPE",
+                            "samples": [
+                                "{signalType}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{MSOAction} the {signalType} signal ",
+                        "to {MSOAction} the {signalType} signal ",
+                        "to {MSOAction} {signalType} signal ",
+                        "{MSOAction} {signalType} signal "
+                    ]
+                },
+                {
+                    "name": "FG",
+                    "slots": [
+                        {
+                            "name": "FGAction",
+                            "type": "FGACTION"
+                        },
+                        {
+                            "name": "signalType",
+                            "type": "SIGNALTYPE",
+                            "samples": [
+                                "{signalType}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{FGAction} a {signalType} wave",
+                        "{FGAction} {signalType} wave",
+                        "to {FGAction} {signalType} wave",
+                        "to {FGAction} a {signalType} wave"
+                    ]
+                },
+                {
+                    "name": "NIUSB",
+                    "slots": [
+                        {
+                            "name": "niUSBAction",
+                            "type": "MSOACTION"
+                        },
+                        {
+                            "name": "signalType",
+                            "type": "SIGNALTYPE",
+                            "samples": [
+                                "{signalType}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "{niUSBAction} the {signalType} input",
+                        "{niUSBAction} {signalType} input",
+                        "to {niUSBAction} the {signalType} input",
+                        "to {niUSBAction} {signalType} input"
+                    ]
+                },
+                {
+                    "name": "Reset",
+                    "slots": [
+                        {
+                            "name": "instrument",
+                            "type": "INSTRUMENT",
+                            "samples": [
+                                "{instrument}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "to reset {instrument}",
+                        "reset {instrument}",
+                        "reset the {instrument}",
+                        "to reset the {instrument} "
+                    ]
+                },
+                {
+                    "name": "DmmRead",
+                    "slots": [
+                        {
+                            "name": "DmmReadAction",
+                            "type": "MSOACTION"
+                        },
+                        {
+                            "name": "instrument",
+                            "type": "INSTRUMENT",
+                            "samples": [
+                                "{instrument}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "what the {instrument} measurement is",
+                        "what is the {instrument} measurement",
+                        "{DmmReadAction} {instrument}",
+                        "{DmmReadAction} the {instrument}",
+                        "to {DmmReadAction} {instrument}",
+                        "to {DmmReadAction} the {instrument}"
+                    ]
+                },
+                {
+                    "name": "PsRead",
+                    "slots": [
+                        {
+                            "name": "PsReadAction",
+                            "type": "MSOACTION"
+                        },
+                        {
+                            "name": "channel",
+                            "type": "CHANNEL",
+                            "samples": [
+                                "{channel}"
+                            ]
+                        },
+                        {
+                            "name": "VorC",
+                            "type": "VORC"
+                        }
+                    ],
+                    "samples": [
+                        "{PsReadAction} {channel}",
+                        "{PsReadAction} the {VorC} on {channel}",
+                        "to {PsReadAction} {channel}",
+                        "to {PsReadAction} the {VorC} on {channel}"
                     ]
                 }
             ],
@@ -479,7 +606,48 @@
                     "values": [
                         {
                             "name": {
-                                "value": "power supply"
+                                "value": "dmm",
+                                "synonyms": [
+                                    "d m m",
+                                    "dm m",
+                                    "d mm",
+                                    "digital multi meter"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mso",
+                                "synonyms": [
+                                    "M So",
+                                    "M so",
+                                    "MSO",
+                                    "m s o",
+                                    "ms o ",
+                                    "m so",
+                                    "mixed signal oscilloscope "
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "dio",
+                                "synonyms": [
+                                    "digital Io",
+                                    "d I o",
+                                    "D Io",
+                                    "d Io",
+                                    "digital i o",
+                                    "digital io",
+                                    "d i o",
+                                    "di o ",
+                                    "d io",
+                                    "outputs",
+                                    "output",
+                                    "inputs ",
+                                    "input",
+                                    "digital input output"
+                                ]
                             }
                         }
                     ]
@@ -655,6 +823,101 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "MSOACTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "measure"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "record"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "get"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "read"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "acquire "
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "SIGNALTYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "square"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "triangle",
+                                "synonyms": [
+                                    "ramp"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sine ",
+                                "synonyms": [
+                                    "sign"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "analog",
+                                "synonyms": [
+                                    "ana log",
+                                    "anna log"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "FGACTION",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "make"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "produce "
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "VORC",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "current"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "voltage"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -672,7 +935,13 @@
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Slot.818467842058.824748843652"
-                            }
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.1541706506227.1043137588085.577106955469"
+                                }
+                            ]
                         },
                         {
                             "name": "variations",
@@ -769,21 +1038,12 @@
                     ]
                 },
                 {
-                    "name": "Reset",
+                    "name": "PsReset",
                     "confirmationRequired": true,
                     "prompts": {
                         "confirmation": "Confirm.Intent.80643596767"
                     },
                     "slots": [
-                        {
-                            "name": "instrument",
-                            "type": "INSTRUMENT",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.80643596767.549554862885"
-                            }
-                        },
                         {
                             "name": "channel",
                             "type": "CHANNEL",
@@ -791,7 +1051,13 @@
                             "elicitationRequired": true,
                             "prompts": {
                                 "elicitation": "Elicit.Slot.80643596767.1080362538898"
-                            }
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.196573937771.1149390933453.1122254826530"
+                                }
+                            ]
                         }
                     ]
                 },
@@ -940,6 +1206,152 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "MSO",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "MSOAction",
+                            "type": "MSOACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "signalType",
+                            "type": "SIGNALTYPE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1539985275863.179224968410"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "FG",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "FGAction",
+                            "type": "FGACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "signalType",
+                            "type": "SIGNALTYPE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1261323193823.1355628124658"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "NIUSB",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "niUSBAction",
+                            "type": "MSOACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "signalType",
+                            "type": "SIGNALTYPE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1087953542855.1467201261046"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Reset",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.870908009625"
+                    },
+                    "slots": [
+                        {
+                            "name": "instrument",
+                            "type": "INSTRUMENT",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.870908009625.485155896419"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PsRead",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "PsReadAction",
+                            "type": "MSOACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "channel",
+                            "type": "CHANNEL",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.648584369719.1204369497126"
+                            }
+                        },
+                        {
+                            "name": "VorC",
+                            "type": "VORC",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "DmmRead",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "DmmReadAction",
+                            "type": "MSOACTION",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "instrument",
+                            "type": "INSTRUMENT",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.159291887189.1192487653858"
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.159291887189.1192487653858.1209492376466"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "delegationStrategy": "ALWAYS"
@@ -991,20 +1403,11 @@
                 ]
             },
             {
-                "id": "Elicit.Slot.80643596767.549554862885",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Which instrument is that for?"
-                    }
-                ]
-            },
-            {
                 "id": "Confirm.Intent.80643596767",
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "Was that reset the {instrument} on {channel} ?"
+                        "value": "Was that reset the power supply on {channel} ?"
                     }
                 ]
             },
@@ -1095,6 +1498,96 @@
                     {
                         "type": "PlainText",
                         "value": "Which pin number was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1539985275863.179224968410",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which signal was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1261323193823.1355628124658",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What type of wave was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1087953542855.1467201261046",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What did you want me to {niUSBAction} ?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.870908009625",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Was that reset the {instrument} ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.870908009625.485155896419",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What instrument was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.648584369719.1204369497126",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What channel was that for?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.159291887189.1192487653858",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what instrument was that?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.159291887189.1192487653858.1209492376466",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Sorry, please say the intrument again"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.1541706506227.1043137588085.577106955469",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Was the volts or millivolts?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.196573937771.1149390933453.1122254826530",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which channel was that for?"
                     }
                 ]
             }
