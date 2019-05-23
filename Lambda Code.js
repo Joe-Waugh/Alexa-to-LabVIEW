@@ -6,7 +6,7 @@ var AWS = require('aws-sdk');
 
 var config = {};
 
-config.IOT_BROKER_ENDPOINT      = "XXX.iot.eu-west-1.amazonaws.com".toLowerCase(); //Put endpoint in place of XXX
+config.IOT_BROKER_ENDPOINT      = "XXX.amazonaws.com".toLowerCase(); // Replace XXX with endpoint
 
 config.IOT_BROKER_REGION        = "eu-west-1";
 
@@ -47,7 +47,6 @@ function buildResponse(sessionAttributes, speechletResponse) {
     };
 }
 
-
 // --------------- Functions that control the skill's behavior -----------------------
 
 function getWelcomeResponse(callback) {
@@ -60,7 +59,6 @@ function getWelcomeResponse(callback) {
     callback(sessionAttributes,
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
-
 function handleSessionEndRequest(callback) {
     const cardTitle = 'Session Ended';
     const speechOutput = 'Thank you for trying the Alexa for Lab view skill. Have a nice day!';
@@ -68,13 +66,11 @@ function handleSessionEndRequest(callback) {
 
     callback({}, buildSpeechletResponse(cardTitle, speechOutput, null, shouldEndSession));
 }
-
 function createVoltageAmmount(SVoltage) {
     return {
         Voltage: SVoltage
     };
 }
-
 function controlVoltageInSession(intent, session, callback) {
     const cardTitle = intent.name;
     const voltageVariationRequest = intent.slots.variations;
@@ -389,7 +385,6 @@ function controlVoltageInSession(intent, session, callback) {
         });
     }
 }
-
 function controlCurrentInSession(intent, session, callback){
     const cardTitle = intent.name;
     const currentVariationRequest = intent.slots.variations;
@@ -665,28 +660,18 @@ function controlCurrentInSession(intent, session, callback){
         });
     }
 }
-
-function resetInSession(intent, session, callback){
+function psResetInSession(intent, session, callback){
     const cardTitle = intent.name;
-    const instrumentRequest = intent.slots.instrument;
     const channelRequest = intent.slots.channel;
     let repromptText = '';
     let sessionAttributes = {};
     const shouldEndSession = true;
     let speechOutput = '';
 
-    if (instrumentRequest) {
-		var instrument = instrumentRequest.value;
-	} else {
-        console.log("This one 1")
-		speechOutput = "Please try again";
-		repromptText = "Please try again";
-		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
-	}
 	if (channelRequest) {
         var channel = channelRequest.value;
     } else {
-        console.log("This one 2")
+        console.log("This one 1")
 		speechOutput = "Please try again";
 		repromptText = "Please try again";
 		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
@@ -742,14 +727,13 @@ function resetInSession(intent, session, callback){
         if (err){
             console.log ("Error in updating shadow") //Handle the error here
         } else {
-            speechOutput = toAlexa + " has been reset";
-            repromptText = toAlexa + " has been reset";
+            speechOutput = toAlexa + " power supply has been reset";
+            repromptText = toAlexa + " power supply has been reset";
             sessionAttributes = createVoltageAmmount("0");
             callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
         }    
     }); 
 }
-
 function dmmInSession(intent, session, callback) {
     const cardTitle = intent.name;
     const dmmFunctionRequest = intent.slots.dmmFunction;
@@ -818,7 +802,6 @@ console.log(dmmFunction)
         }    
     }); 
 }
-
 function openProgrammeInSession(intent, session, callback){
     const cardTitle = intent.name;
     const openProgrammeRequest = intent.slots.programme;
@@ -869,7 +852,6 @@ function openProgrammeInSession(intent, session, callback){
         callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
     }
 }
-
 function closeProgrammeInSession(intent, session, callback){
     const cardTitle = intent.name;
     const closeProgrammeRequest = intent.slots.programme;
@@ -920,7 +902,6 @@ function closeProgrammeInSession(intent, session, callback){
         callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
     }
 }
-
 function stopProgrammeInSession(intent, session, callback){
     const cardTitle = intent.name;
     const stopProgrammeRequest = intent.slots.programme;
@@ -1080,6 +1061,413 @@ function dioInSession(intent, session, callback){
         }    
     }); 
 }
+function msoInSession(intent,session,callback){
+    const cardTitle = intent.name;
+    const actionRequest = intent.slots.MSOAction;
+    const signalRequest = intent.slots.signalType;
+    let repromptText = '';
+    let sessionAttributes = {};
+    const shouldEndSession = true;
+    let speechOutput = '';
+
+    if (actionRequest) {
+		var action = actionRequest.value;
+	} else {
+        console.log("This one 1")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    if (signalRequest) {
+		var signal = signalRequest.value;
+	} else {
+        console.log("This one 2")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    console.log(action)
+    console.log(signal)
+    if (action == "get" || action == "read" || action == "acquire" || action == "record" || action == "measure"){
+        if (signal == "analog"){
+            var payloadObj={ "state":
+            { "desired":
+                {
+                    msoSignal: "Acquire"
+                }
+            }
+        };
+        var paramsUpdate = {
+            "thingName" : config.IOT_THING_NAME,
+            "payload" : JSON.stringify(payloadObj)
+        };
+    
+        iotData.updateThingShadow(paramsUpdate, function(err, data) {
+            if (err){
+                console.log ("Error in updating shadow") //Handle the error here
+            } else {
+                speechOutput = "Analog signal has been aquired and saved";
+                repromptText = "Analog signal has been aquired and saved";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }    
+        }); 
+        }else{
+            speechOutput = "I can't aquire that signal";
+            repromptText = "I can't aquire that signal";
+            sessionAttributes = createVoltageAmmount("0");
+            callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+        }
+    }else{
+        speechOutput = "Sorry, please can you try again?";
+        repromptText = "Sorry, please can you try again?";
+        sessionAttributes = createVoltageAmmount("0");
+        callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+}
+function fgInSession(intent, session, callback){
+    const cardTitle = intent.name;
+    const actionRequest = intent.slots.FGAction;
+    const signalRequest = intent.slots.signalType;
+    let repromptText = '';
+    let sessionAttributes = {};
+    const shouldEndSession = true;
+    let speechOutput = '';
+
+    if (actionRequest) {
+		var action = actionRequest.value;
+	} else {
+        console.log("This one 1")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    if (signalRequest) {
+		var signal = signalRequest.value;
+	} else {
+        console.log("This one 2")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    console.log(action)
+    console.log(signal)
+    if (action == "make" || action == "produce"){
+        if (signal == "sine"){
+            var payloadObj={ "state":
+            { "desired":
+                {
+                    fgSignal: "Sine"
+                }
+            }
+        };
+        var paramsUpdate = {
+            "thingName" : config.IOT_THING_NAME,
+            "payload" : JSON.stringify(payloadObj)
+        };
+    
+        iotData.updateThingShadow(paramsUpdate, function(err, data) {
+            if (err){
+                console.log ("Error in updating shadow") //Handle the error here
+            } else {
+                speechOutput = "Now producing a sine wave";
+                repromptText = "Now producing a sine wave";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }    
+        }); 
+        }else if (signal == "square"){
+            var payloadObj={ "state":
+            { "desired":
+                {
+                    fgSignal: "Square"
+                }
+            }
+        };
+        var paramsUpdate = {
+            "thingName" : config.IOT_THING_NAME,
+            "payload" : JSON.stringify(payloadObj)
+        };
+    
+        iotData.updateThingShadow(paramsUpdate, function(err, data) {
+            if (err){
+                console.log ("Error in updating shadow") //Handle the error here
+            } else {
+                speechOutput = "Now producing a square wave";
+                repromptText = "Now producing a sqaure wave";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }    
+        }); 
+        }else if (signal == "triangle"){
+            var payloadObj={ "state":
+            { "desired":
+                {
+                    fgSignal: "Triangle"
+                }
+            }
+        };
+        var paramsUpdate = {
+            "thingName" : config.IOT_THING_NAME,
+            "payload" : JSON.stringify(payloadObj)
+        };
+    
+        iotData.updateThingShadow(paramsUpdate, function(err, data) {
+            if (err){
+                console.log ("Error in updating shadow") //Handle the error here
+            } else {
+                speechOutput = "Now producing a triangle wave";
+                repromptText = "Now producing a triangle wave";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }    
+        }); 
+        }else{
+            speechOutput = "I can't make that signal";
+            repromptText = "I can't make that signal";
+            sessionAttributes = createVoltageAmmount("0");
+            callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+        }
+    }else{
+        speechOutput = "Sorry, please can you try again?";
+        repromptText = "Sorry, please can you try again?";
+        sessionAttributes = createVoltageAmmount("0");
+        callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+}
+function niUsbInSession(intent, session, callback){
+    const cardTitle = intent.name;
+    const actionRequest = intent.slots.niUSBAction;
+    const signalRequest = intent.slots.signalType;
+    let repromptText = '';
+    let sessionAttributes = {};
+    const shouldEndSession = true;
+    let speechOutput = '';
+
+    if (actionRequest) {
+		var action = actionRequest.value;
+	} else {
+        console.log("This one 1")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    if (signalRequest) {
+		var signal = signalRequest.value;
+	} else {
+        console.log("This one 2")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    console.log(action)
+    console.log(signal)
+    if (action == "get" || action == "read" || action == "acquire" || action == "record"){
+        if (signal == "analog"){
+            var payloadObj={ "state":
+                { "desired":
+                    {
+                        usbSignal: "Acquire"
+                    }
+                }
+            };
+            var paramsUpdate = {
+                "thingName" : config.IOT_THING_NAME,
+                "payload" : JSON.stringify(payloadObj)
+            };
+    
+            iotData.updateThingShadow(paramsUpdate, function(err, data) {
+                if (err){
+                    console.log ("Error in updating shadow") //Handle the error here
+                } else {
+                    speechOutput = "Analog signal has been aquired and saved";
+                    repromptText = "Analog signal has been aquired and saved";
+                    sessionAttributes = createVoltageAmmount("0");
+                    callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+                }    
+            }); 
+        }else{
+            speechOutput = "I can't aquire that signal";
+            repromptText = "I can't aquire that signal";
+            sessionAttributes = createVoltageAmmount("0");
+            callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+        }
+    }else{
+        speechOutput = "Sorry, please can you try again?";
+        repromptText = "Sorry, please can you try again?";
+        sessionAttributes = createVoltageAmmount("0");
+        callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+}
+function resetInSession(intent, session, callback){
+    const cardTitle = intent.name;
+    const instrumentRequest = intent.slots.instrument;
+    let repromptText = '';
+    let sessionAttributes = {};
+    const shouldEndSession = true;
+    let speechOutput = '';
+
+	if (instrumentRequest) {
+        var instrument = instrumentRequest.value;
+        instrument = instrument.toLowerCase();
+    } else {
+        console.log("This one 1")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    console.log(instrument)
+    if (instrument == "mso" || instrument == "m so"|| instrument == "m s o"|| instrument == "ms o"|| instrument == "mixed scope oscilliscope"){
+        var payloadObj={ "state":
+            { "desired":
+                {
+                    reset: "mso"
+                }
+            }
+        };
+        var paramsUpdate = {
+            "thingName" : config.IOT_THING_NAME,
+            "payload" : JSON.stringify(payloadObj)
+        };
+    
+        iotData.updateThingShadow(paramsUpdate, function(err, data) {
+            if (err){
+                console.log ("Error in updating shadow") //Handle the error here
+            } else {
+                speechOutput = "The oscilloscope has been reset";
+                repromptText = "The oscilloscope has been reset";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }    
+        });
+    }else if(instrument == "dio" || instrument == "d io"|| instrument == "di o"|| instrument == "d i o"|| instrument == "digital io"){
+        var payloadObj={ "state":
+            { "desired":
+                {
+                    reset: "dio"
+                }
+            }
+        };
+        var paramsUpdate = {
+            "thingName" : config.IOT_THING_NAME,
+            "payload" : JSON.stringify(payloadObj)
+        };
+    
+        iotData.updateThingShadow(paramsUpdate, function(err, data) {
+            if (err){
+                console.log ("Error in updating shadow") //Handle the error here
+            } else {
+                speechOutput = "The digital IO has been reset";
+                repromptText = "The digital IO has been reset";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }    
+        });
+    }else{
+        speechOutput = "I can't reset that";
+        repromptText = "I can't reset that";
+        sessionAttributes = createVoltageAmmount("0");
+        callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+}
+function dmmReadInSession(intent, session, callback){
+    const cardTitle = intent.name;
+    const instrumentRequest = intent.slots.instrument;
+    let repromptText = '';
+    let sessionAttributes = {};
+    const shouldEndSession = true;
+    let speechOutput = '';
+    var params = {
+        thingName : "Test"
+    };
+    var payload = {}
+    var objState
+
+	if (instrumentRequest) {
+        var instrument = instrumentRequest.value;
+        instrument = instrument.toLowerCase()
+    } else {
+        console.log("This one 1")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+		callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+    }
+    if (instrument == "dmm" || instrument == "d mm"|| instrument == "dm m"|| instrument == "d m m"|| instrument == "digital multi meter"){
+        iotData.getThingShadow(params, function (err, data) {
+            if (err) {
+                console.log("Error getting shadow"); // an error occurred
+            }
+            else {
+                // successful response
+                payload = data.payload;
+                objState = JSON.parse(payload);
+                var shadow = objState.state.reported.dmmMeasurement
+                speechOutput = "The Digital MultiMeter reading is " + shadow;
+                repromptText = "The Digital MultiMeter reading is " + shadow;
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }
+        });
+    }
+}
+function psReadInSession(intent, session, callback){
+    const cardTitle = intent.name;
+    const channelRequest = intent.slots.channel;
+    let repromptText = '';
+    let sessionAttributes = {};
+    const shouldEndSession = true;
+    let speechOutput = '';
+    var params = {
+        thingName : "Test"
+    };
+    var payload = {}
+    var objState
+
+	if (channelRequest) {
+        var channel = channelRequest.value;
+    } else {
+        console.log("This one 1")
+		speechOutput = "Please try again";
+		repromptText = "Please try again";
+        callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession)); 
+    }
+    iotData.getThingShadow(params, function (err, data) {
+        if (err) {
+            console.log("Error getting shadow"); // an error occurred
+        }
+        else {
+            if (channel == "channel 1" || channel == "1"){
+            // successful response
+                payload = data.payload;
+                objState = JSON.parse(payload);
+                var shadowV = objState.state.reported.voltageC1
+                var shadowC = objState.state.reported.currentC1
+                speechOutput = "Channel 1 voltage is " + shadowV + " volts and current is " + shadowC + " amps";
+                repromptText = "Channel 1 voltage is " + shadowV + " volts and current is " + shadowC + " amps";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }else if(channel == "channel 2" || channel == "2"){
+                payload = data.payload;
+                objState = JSON.parse(payload);
+                var shadowV = objState.state.reported.voltageC2
+                var shadowC = objState.state.reported.currentC2
+                speechOutput = "Channel 2 voltage is " + shadowV + " volts and current is " + shadowC + " amps";
+                repromptText = "Channel 2 voltage is " + shadowV + " volts and current is " + shadowC + " amps";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }else if(channel == "channel 3" || channel == "3"){
+                payload = data.payload;
+                objState = JSON.parse(payload);
+                var shadowV = objState.state.reported.voltageC3
+                var shadowC = objState.state.reported.currentC3
+                speechOutput = "Channel 3 voltage is " + shadowV + " volts and current is " + shadowC + " amps";
+                repromptText = "Channel 3 voltage is " + shadowV + " volts and current is " + shadowC + " amps";
+                sessionAttributes = createVoltageAmmount("0");
+                callback(sessionAttributes,buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+            }
+        }
+    });
+}
 /* function dmmRangeInSession(intent, session, callback) {
     const cardTitle = intent.name;
     const dmmFunctionRequest = intent.slots.dmmFunction;
@@ -1194,8 +1582,8 @@ function onIntent(intentRequest, session, callback) {
         controlVoltageInSession(intent, session, callback);
     }else if (intentName === 'ChangeCurrent') {
         controlCurrentInSession(intent, session, callback);
-    }else if (intentName === 'Reset') {
-        resetInSession(intent, session, callback);
+    }else if (intentName === 'PsReset') {
+        psResetInSession(intent, session, callback);
     }else if (intentName === 'DigitalMultiMeter') {
         dmmInSession(intent, session, callback);
     }else if (intentName === 'ManualRangeDMM') {
@@ -1208,6 +1596,18 @@ function onIntent(intentRequest, session, callback) {
         stopProgrammeInSession(intent, session, callback);
     }else if (intentName === 'DigitalIO') {
         dioInSession(intent, session, callback);
+    }else if (intentName === 'MSO') {
+        msoInSession(intent, session, callback);
+    }else if (intentName === 'FG') {
+        fgInSession(intent, session, callback);
+    }else if (intentName === 'NIUSB') {
+        niUsbInSession(intent, session, callback);
+    }else if (intentName === 'Reset') {
+        resetInSession(intent, session, callback);
+    }else if (intentName === 'DmmRead') {
+        dmmReadInSession(intent, session, callback);
+    }else if (intentName === 'PsRead') {
+        psReadInSession(intent, session, callback);
     }else if (intentName === 'AMAZON.HelpIntent') {
         getWelcomeResponse(callback);
     }else if (intentName === 'AMAZON.StopIntent' || intentName === 'AMAZON.CancelIntent') {
